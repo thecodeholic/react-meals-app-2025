@@ -1,6 +1,6 @@
 function SearchForm({ search, setSearch, handleSearch }) {
   return (
-    <form onSubmit={handleSearch} className="mt-4">
+    <form onSubmit={handleSearch} className="mt-4 flex justify-center">
       <input
         type="text"
         value={search}

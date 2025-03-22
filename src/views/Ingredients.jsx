@@ -29,7 +29,7 @@ function Ingredients() {
 
   return (
     <div>
-      <h2 className="text-2xl mb-4">Ingredients</h2>
+      <h2 className="text-2xl text-center mb-4">Ingredients</h2>
       {errorMessage && <p className="text-red-500">{errorMessage}</p>} {/* Display error message */}
       {loading ? (
         <Spinner /> // Use Spinner component

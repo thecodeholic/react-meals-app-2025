@@ -36,10 +36,6 @@ function Home() {
   };
 
   useEffect(() => {
-    fetchRandomMeals();
-  }, []);
-
-  useEffect(() => {
     if (search === '') {
       fetchRandomMeals();
     }
