@@ -8,7 +8,7 @@ function SearchForm({ search, setSearch, handleSearch }) {
         className="p-2 rounded bg-gray-700 text-white"
         placeholder="Search for a meal..."
       />
-      <button type="submit" className="ml-2 p-2 rounded bg-blue-600 hover:bg-blue-700">
+      <button type="submit" className="ml-2 p-2 rounded bg-indigo-600 hover:bg-indigo-700">
         Search
       </button>
     </form>

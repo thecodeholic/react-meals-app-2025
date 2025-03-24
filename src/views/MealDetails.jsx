@@ -85,7 +85,7 @@ function MealDetails() {
               </ul>
             </div>
           </div>
-          <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block p-2 rounded bg-blue-600 hover:bg-blue-700">
+          <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block p-2 rounded bg-indigo-600 hover:bg-indigo-700">
             YouTube
           </a>
           <a href={meal.strSource} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block p-2 rounded bg-gray-600 hover:bg-gray-700 ml-2">

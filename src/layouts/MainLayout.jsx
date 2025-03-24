@@ -9,13 +9,13 @@ function MainLayout() {
           <nav>
             <NavLink
               to="/"
-              className={({ isActive }) => `mr-4 ${isActive ? 'text-blue-500' : ''}`}
+              className={({ isActive }) => `mr-4 ${isActive ? 'text-indigo-500' : ''}`}
             >
               Home
             </NavLink>
             <NavLink
               to="/ingredients"
-              className={({ isActive }) => `mr-4 ${isActive ? 'text-blue-500' : ''}`}
+              className={({ isActive }) => `mr-4 ${isActive ? 'text-indigo-500' : ''}`}
             >
               Ingredients
             </NavLink>

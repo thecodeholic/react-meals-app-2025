@@ -8,7 +8,7 @@ function MealCard({ meal }) {
         <h2 className="mt-2 text-xl font-bold">{meal.strMeal}</h2>
         <p className="mt-1">{meal.strInstructions?.substring(0, 100)}...</p>
       </Link>
-      <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block p-2 rounded bg-blue-600 hover:bg-blue-700">
+      <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block p-2 rounded bg-indigo-600 hover:bg-indigo-700">
         YouTube
       </a>
     </div>
