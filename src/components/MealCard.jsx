@@ -1,18 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-function MealCard({ meal }) {
-  return (
-    <div className="bg-gray-800 p-4 rounded text-left">
-      <Link to={`/meal/${meal.idMeal}`}>
-        <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-48 object-cover rounded" />
-        <h2 className="mt-2 text-xl font-bold">{meal.strMeal}</h2>
-        <p className="mt-1">{meal.strInstructions?.substring(0, 100)}...</p>
-      </Link>
-      <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block p-2 rounded bg-indigo-600 hover:bg-indigo-700">
-        YouTube
-      </a>
-    </div>
-  );
+export default function MealCard({ meal }) {
+    return (
+        <div className="bg-gray-800 text-white max-w-sm rounded overflow-hidden shadow-lg">
+            <Link to={`/meal/${meal.idMeal}`}>
+                <img className="w-full" src={meal.strMealThumb} alt="Meal" />
+                <div className="px-6 py-4">
+                    <div className="font-bold text-xl">{meal.strMeal}</div>
+                </div>
+            </Link>
+            {(meal.strInstructions || meal.strYoutube) && <div className="px-6 py-4">
+                {meal.strInstructions && <p className="text-gray-300 text-base">
+                    {meal.strInstructions.slice(0, 100)}...
+                </p>}
+                {meal.strYoutube && (
+                    <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer">
+                        <button className="bg-indigo-600 text-white px-4 py-2 rounded mt-2 block">Watch on YouTube</button>
+                    </a>
+                )}
+            </div>}
+        </div>
+    )
 }
-
-export default MealCard;

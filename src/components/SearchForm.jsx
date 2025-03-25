@@ -1,18 +1,36 @@
-function SearchForm({ search, setSearch, handleSearch }) {
+import React, { useEffect, useRef, useState } from 'react'
+
+export default function SearchForm({search, setSearch, handleSearch}) {
+  
+  const inputRef = useRef(null)
+
+  const onSearch = (e) => {
+    e.preventDefault()
+    handleSearch(search)
+  }
+
+  useEffect(() => {
+    if (inputRef.current)
+      inputRef.current.focus()
+  }, [])
+
   return (
-    <form onSubmit={handleSearch} className="mt-4 flex justify-center">
+    <form onSubmit={onSearch} className="flex items-center">
       <input
         type="text"
+        name="search"
+        ref={inputRef}
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="p-2 rounded bg-gray-700 text-white"
-        placeholder="Search for a meal..."
+        onInput={(e) => setSearch(e.target.value)}
+        placeholder="Search..."
+        className="p-2 border border-gray-300 rounded-l"
       />
-      <button type="submit" className="ml-2 p-2 rounded bg-indigo-600 hover:bg-indigo-700">
+      <button
+        type="submit"
+        className="p-2 bg-indigo-600 text-white rounded-r"
+      >
         Search
       </button>
     </form>
-  );
+  )
 }
-
-export default SearchForm;

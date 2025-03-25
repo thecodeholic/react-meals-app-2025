@@ -1,14 +1,21 @@
-import { useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import AppRoutes from './routes/AppRoutes';
+import Home from './views/Home';
+import Ingredients from './views/Ingredients';
+import MealsByIngredient from './views/MealsByIngredient';
+import MealDetails from './views/MealDetails';
+import Login from './views/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const location = useLocation();
-
   return (
-    <div>
-      <AppRoutes />
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+      <Route path="/ingredients" element={<ProtectedRoute><Ingredients /></ProtectedRoute>} />
+      <Route path="/ingredient/:ingredient" element={<ProtectedRoute><MealsByIngredient /></ProtectedRoute>} />
+      <Route path="/meal/:id" element={<ProtectedRoute><MealDetails /></ProtectedRoute>} />
+    </Routes>
   );
 }
 

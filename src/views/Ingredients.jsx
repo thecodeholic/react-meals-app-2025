@@ -1,49 +1,53 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Spinner from '../components/Spinner'; // Import Spinner
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import MainLayout from '../layouts/MainLayout'
+import Card from '../components/Card'
+import LoadingIndicator from '../components/LoadingIndicator'
 
-function Ingredients() {
-  const [ingredients, setIngredients] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
-  const [errorMessage, setErrorMessage] = useState(''); // Add errorMessage state
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+export default function Ingredients() {
+  const [ingredients, setIngredients] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const fetchIngredients = async () => {
+      setLoading(true)
+      setError('')
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/list.php?i=list`);
-        if (!response.ok) {
-          const text = await response.text();
-          throw new Error(`Network response was not ok: ${text}`);
-        }
-        const data = await response.json();
-        setIngredients(data.meals || []);
+        const response = await fetch(`${API_BASE_URL}/list.php?i=list`)
+        const data = await response.json()
+        setIngredients(data.meals || [])
+        setLoading(false)
       } catch (error) {
-        console.error('Error fetching ingredients:', error);
-        setErrorMessage('Failed to fetch ingredients. Please try again later.'); // Set error message
-      } finally {
-        setLoading(false); // Set loading to false after fetching
+        console.error('Error fetching ingredients:', error)
+        setError('Error fetching ingredients')
+        setLoading(false)
       }
-    };
-    fetchIngredients();
-  }, []);
+    }
+
+    fetchIngredients()
+  }, [])
 
   return (
-    <div>
-      <h2 className="text-2xl text-center mb-4">Ingredients</h2>
-      {errorMessage && <p className="text-red-500">{errorMessage}</p>} {/* Display error message */}
-      {loading ? (
-        <Spinner /> // Use Spinner component
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
-          {ingredients.map((ingredient) => (
-            <Link key={ingredient.idIngredient} to={`/ingredient/${ingredient.strIngredient}`} className="bg-gray-800 p-4 rounded">
-              {ingredient.strIngredient}
+    <MainLayout>
+      <div className='p-4'>
+        <h2 className='text-2xl font-bold mb-4'>Ingredients</h2>
+        {error && <p className="text-center py-8 text-red-500">{error}</p>}
+        {loading && <LoadingIndicator />}
+        {!loading && ingredients.length === 0 && !error && <p className="text-center py-8 text-gray-400">No ingredients found</p>}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {ingredients.map(ingredient => (
+            <Link key={ingredient.idIngredient} 
+            to={`/ingredient/${ingredient.strIngredient}`}>
+              <Card>
+                <h2>{ingredient.strIngredient}</h2>
+              </Card>
             </Link>
           ))}
         </div>
-      )}
-    </div>
-  );
+      </div>
+    </MainLayout>
+  )
 }
-
-export default Ingredients;
